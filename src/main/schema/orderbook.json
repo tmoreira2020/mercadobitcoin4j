@@ -1,0 +1,24 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"type": "object",
+	"properties": {
+		"asks": {
+			"type": "array",
+			"items": {
+				"type": "array",
+				"items": {
+					"type": "number"
+				}
+			}
+		},
+		"bids": {
+			"type": "array",
+			"items": {
+				"type": "array",
+				"items": {
+					"type": "number"
+				}
+			}
+		}
+	}
+}
