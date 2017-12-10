@@ -4,6 +4,16 @@
 	"properties": {
 		"ticker": {
 			"$ref": "ticker.json"
+		},
+		"response_data": {
+			"javaName": "userInfo",
+			"$ref": "user-info.json"
+		},
+		"status_code": {
+			"type": "integer"
+		},
+		"server_unix_timestamp": {
+			"type": "string"
 		}
 	}
 }

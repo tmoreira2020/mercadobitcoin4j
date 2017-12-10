@@ -1,0 +1,48 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"id": "http://example.com/example.json",
+	"javaType" : "br.com.thiagomoreira.mercadobitcoin.model.UserInfo",
+	"type": "object",
+	"properties": {
+		"balance": {
+			"type": "object",
+			"properties": {
+				"brl": {
+					"$ref": "brl.json"
+				},
+				"btc": {
+					"$ref": "btc.json"
+				},
+				"ltc": {
+					"$ref": "ltc.json"
+				},
+				"bch": {
+					"$ref": "bch.json"
+				},
+				"btg": {
+					"$ref": "btg.json"
+				}
+			}
+		},
+		"withdrawal_limits": {
+			"type": "object",
+			"properties": {
+				"brl": {
+					"$ref": "brl.json"
+				},
+				"btc": {
+					"$ref": "btc.json"
+				},
+				"ltc": {
+					"$ref": "ltc.json"
+				},
+				"bch": {
+					"$ref": "bch.json"
+				},
+				"btg": {
+					"$ref": "btg.json"
+				}
+			}
+		}
+	}
+}

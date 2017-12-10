@@ -20,7 +20,10 @@ import java.io.IOException;
 import br.com.thiagomoreira.mercadobitcoin.model.Orderbook;
 import br.com.thiagomoreira.mercadobitcoin.model.Response;
 import br.com.thiagomoreira.mercadobitcoin.model.Ticker;
+import br.com.thiagomoreira.mercadobitcoin.model.UserInfo;
 import br.com.thiagomoreira.mercadobitcoin.service.DataService;
+import br.com.thiagomoreira.mercadobitcoin.service.TransactionService;
+import br.com.thiagomoreira.mercadobitcoin.util.HmacUtil;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -30,6 +33,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MercadoBitcoin {
 
 	protected DataService dataService;
+	protected TransactionService transactionService;
 
 	public MercadoBitcoin() {
 		this(false);
@@ -57,6 +61,7 @@ public class MercadoBitcoin {
 				.client(httpClientBuilder.build()).build();
 
 		dataService = retrofit.create(DataService.class);
+		transactionService = retrofit.create(TransactionService.class);
 	}
 
 	public Orderbook getOrderbook(String coin) throws IOException {
@@ -80,6 +85,27 @@ public class MercadoBitcoin {
 
 		if (response.isSuccessful()) {
 			return response2.getTicker();
+		} else {
+			throw new IOException("");
+		}
+	}
+
+	public UserInfo getUserInfo(String clientId, String clientSecret)
+			throws Exception {
+		long nounce = System.currentTimeMillis();
+		String method = "get_account_info";
+		String path = "/tapi/v3/?tapi_method=" + method + "&tapi_nonce="
+				+ nounce;
+
+		String tapiMac = HmacUtil.calculateHMAC(path, clientSecret);
+		Call<Response> call = transactionService.getUserInfo(clientId, tapiMac,
+				method, nounce);
+
+		retrofit2.Response<Response> response = call.execute();
+		Response response2 = response.body();
+
+		if (response.isSuccessful()) {
+			return response2.getResponseData();
 		} else {
 			throw new IOException("");
 		}

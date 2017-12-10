@@ -1,0 +1,54 @@
+{
+	"response_data": {
+		"balance": {
+			"brl": {
+				"available": "0.04799",
+				"total": "0.04799"
+			},
+			"btc": {
+				"available": "0.83368147",
+				"total": "0.83618147",
+				"amount_open_orders": 1
+			},
+			"ltc": {
+				"available": "0.00000330",
+				"total": "0.00000330",
+				"amount_open_orders": 0
+			},
+			"bch": {
+				"available": "0.23000891",
+				"total": "0.23000891",
+				"amount_open_orders": 0
+			},
+			"btg": {
+				"available": "0.89620988",
+				"total": "0.89620988",
+				"amount_open_orders": 0
+			}
+		},
+		"withdrawal_limits": {
+			"brl": {
+				"available": "20000.00",
+				"total": "20000.00"
+			},
+			"btc": {
+				"available": "25.00000000",
+				"total": "25.00000000"
+			},
+			"ltc": {
+				"available": "500.00000000",
+				"total": "500.00000000"
+			},
+			"bch": {
+				"available": "25.00000000",
+				"total": "25.00000000"
+			},
+			"btg": {
+				"available": 0,
+				"total": 0
+			}
+		}
+	},
+	"status_code": 100,
+	"server_unix_timestamp": "1512906788"
+}

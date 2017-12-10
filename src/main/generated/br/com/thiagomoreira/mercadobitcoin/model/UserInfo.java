@@ -17,49 +17,47 @@
 package br.com.thiagomoreira.mercadobitcoin.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Orderbook implements Serializable
+public class UserInfo implements Serializable
 {
 
-    @SerializedName("asks")
+    @SerializedName("balance")
     @Expose
-    private List<List<Double>> asks = new ArrayList<List<Double>>();
-    @SerializedName("bids")
+    private Balance balance;
+    @SerializedName("withdrawal_limits")
     @Expose
-    private List<List<Double>> bids = new ArrayList<List<Double>>();
-    private final static long serialVersionUID = 7492488246067148583L;
+    private WithdrawalLimits withdrawalLimits;
+    private final static long serialVersionUID = 8235025622565064898L;
 
-    public List<List<Double>> getAsks() {
-        return asks;
+    public Balance getBalance() {
+        return balance;
     }
 
-    public void setAsks(List<List<Double>> asks) {
-        this.asks = asks;
+    public void setBalance(Balance balance) {
+        this.balance = balance;
     }
 
-    public List<List<Double>> getBids() {
-        return bids;
+    public WithdrawalLimits getWithdrawalLimits() {
+        return withdrawalLimits;
     }
 
-    public void setBids(List<List<Double>> bids) {
-        this.bids = bids;
+    public void setWithdrawalLimits(WithdrawalLimits withdrawalLimits) {
+        this.withdrawalLimits = withdrawalLimits;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("asks", asks).append("bids", bids).toString();
+        return new ToStringBuilder(this).append("balance", balance).append("withdrawalLimits", withdrawalLimits).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(bids).append(asks).toHashCode();
+        return new HashCodeBuilder().append(balance).append(withdrawalLimits).toHashCode();
     }
 
     @Override
@@ -67,11 +65,11 @@ public class Orderbook implements Serializable
         if (other == this) {
             return true;
         }
-        if ((other instanceof Orderbook) == false) {
+        if ((other instanceof UserInfo) == false) {
             return false;
         }
-        Orderbook rhs = ((Orderbook) other);
-        return new EqualsBuilder().append(bids, rhs.bids).append(asks, rhs.asks).isEquals();
+        UserInfo rhs = ((UserInfo) other);
+        return new EqualsBuilder().append(balance, rhs.balance).append(withdrawalLimits, rhs.withdrawalLimits).isEquals();
     }
 
 }

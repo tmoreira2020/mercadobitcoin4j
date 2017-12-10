@@ -20,8 +20,11 @@ import java.io.IOException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import br.com.thiagomoreira.mercadobitcoin.model.Balance;
+import br.com.thiagomoreira.mercadobitcoin.model.Brl;
 import br.com.thiagomoreira.mercadobitcoin.model.Orderbook;
 import br.com.thiagomoreira.mercadobitcoin.model.Ticker;
+import br.com.thiagomoreira.mercadobitcoin.model.UserInfo;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okio.Buffer;
@@ -54,6 +57,27 @@ public class MercadoBitcoinTest {
 		Assert.assertEquals(53400.00000000, ticker.getLast(), delta);
 		Assert.assertEquals(53500.00000000, ticker.getSell(), delta);
 		Assert.assertEquals(1512829632, ticker.getDate());
+	}
+
+	@Test
+	public void getUserInfo() throws Exception {
+		MercadoBitcoin mercadobitcoin = new MercadoBitcoin(
+				setup("/get-user-info.json"), true);
+
+		UserInfo userInfo = mercadobitcoin.getUserInfo("null", "null");
+
+		double delta = 0.00000000;
+		Assert.assertNotNull(userInfo);
+
+		Balance balance = userInfo.getBalance();
+		Assert.assertNotNull(balance);
+
+		Brl brl = balance.getBrl();
+
+		Assert.assertNotNull(brl);
+
+		double available = 0.04799;
+		Assert.assertEquals(available, brl.getAvailable(), delta);
 	}
 
 	protected String setup(String jsonPath) throws IOException {

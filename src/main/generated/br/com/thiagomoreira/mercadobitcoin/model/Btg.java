@@ -17,49 +17,58 @@
 package br.com.thiagomoreira.mercadobitcoin.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-public class Orderbook implements Serializable
+public class Btg implements Serializable
 {
 
-    @SerializedName("asks")
+    @SerializedName("available")
     @Expose
-    private List<List<Double>> asks = new ArrayList<List<Double>>();
-    @SerializedName("bids")
+    private double available;
+    @SerializedName("total")
     @Expose
-    private List<List<Double>> bids = new ArrayList<List<Double>>();
-    private final static long serialVersionUID = 7492488246067148583L;
+    private double total;
+    @SerializedName("amount_open_orders")
+    @Expose
+    private int amountOpenOrders;
+    private final static long serialVersionUID = 8736593133663593110L;
 
-    public List<List<Double>> getAsks() {
-        return asks;
+    public double getAvailable() {
+        return available;
     }
 
-    public void setAsks(List<List<Double>> asks) {
-        this.asks = asks;
+    public void setAvailable(double available) {
+        this.available = available;
     }
 
-    public List<List<Double>> getBids() {
-        return bids;
+    public double getTotal() {
+        return total;
     }
 
-    public void setBids(List<List<Double>> bids) {
-        this.bids = bids;
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
+    public int getAmountOpenOrders() {
+        return amountOpenOrders;
+    }
+
+    public void setAmountOpenOrders(int amountOpenOrders) {
+        this.amountOpenOrders = amountOpenOrders;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).append("asks", asks).append("bids", bids).toString();
+        return new ToStringBuilder(this).append("available", available).append("total", total).append("amountOpenOrders", amountOpenOrders).toString();
     }
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(bids).append(asks).toHashCode();
+        return new HashCodeBuilder().append(available).append(amountOpenOrders).append(total).toHashCode();
     }
 
     @Override
@@ -67,11 +76,11 @@ public class Orderbook implements Serializable
         if (other == this) {
             return true;
         }
-        if ((other instanceof Orderbook) == false) {
+        if ((other instanceof Btg) == false) {
             return false;
         }
-        Orderbook rhs = ((Orderbook) other);
-        return new EqualsBuilder().append(bids, rhs.bids).append(asks, rhs.asks).isEquals();
+        Btg rhs = ((Btg) other);
+        return new EqualsBuilder().append(available, rhs.available).append(amountOpenOrders, rhs.amountOpenOrders).append(total, rhs.total).isEquals();
     }
 
 }
